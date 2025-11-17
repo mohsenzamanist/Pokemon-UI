@@ -3,21 +3,32 @@ const pokemonTable = document.querySelector("#pokemon-table");
 const tBody = document.querySelector("#pokemon-table tbody");
 const pokemonModal = document.querySelector("#pokemon-modal");
 const modalContent = document.querySelector("#modal-content");
-const closeModalBtn = document.querySelector("#close-modal-btn");
+const searchInput = document.querySelector("#search-input");
 
-async function createTable() {
-  const pokemons = await getPokemons();
-  pokemons.forEach((pokemon, idx) => {
+var pokemons = [];
+window.addEventListener("load", async () => {
+  pokemons = await getPokemons();
+  render(pokemons);
+});
+
+searchInput.addEventListener("keyup", (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm)
+  );
+  render(filteredPokemons);
+});
+
+function render(pokemons) {
+  tBody.innerHTML = "";
+  pokemons.forEach((pokemon) => {
     const row = document.createElement("tr");
     row.classList.add("pokemon-row");
-    row.dataset.id = pokemon.url.split("/").filter(Boolean).pop();
-    row.innerHTML = `<td><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url
-      .split("/")
-      .filter(Boolean)
-      .pop()}.png" alt="${pokemon.name}" /></td><td>${pokemon.url
-      .split("/")
-      .filter(Boolean)
-      .pop()}</td><td>${
+    const id = pokemon.url.split("/").filter(Boolean).pop();
+    row.dataset.id = id;
+    row.innerHTML = `<td><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png" alt="${
+      pokemon.name
+    }" /></td><td>${id}</td><td>${
       pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
     }</td>`;
     tBody.appendChild(row);
@@ -37,10 +48,6 @@ pokemonModal.addEventListener("click", () => {
 
 modalContent.addEventListener("click", (e) => e.stopPropagation());
 
-closeModalBtn.addEventListener("click", () =>
-  pokemonModal.classList.add("hidden")
-);
-
 async function showPokemonDetails(id) {
   const pokemonDetails = await getPokemonDetails(id);
   pokemonModal.classList.remove("hidden");
@@ -53,5 +60,3 @@ async function showPokemonDetails(id) {
     pokemonDetails.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1)
   }</div></div>${abilitiesHtml}`;
 }
-
-createTable();
