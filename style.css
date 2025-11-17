@@ -4,10 +4,45 @@
 }
 
 body {
+  margin: 0;
   font-family: var(--main-font);
 }
 
 .main-body {
   width: 100%;
   background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+header {
+  margin-bottom: 1rem;
+}
+
+.pokemon-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hidden {
+  display: none;
+}
+.modal-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

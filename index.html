@@ -12,7 +12,7 @@
       <header class="search">
         <form>
           <label for="search-term"
-            >Serch:
+            >Search Pokemons:
             <input
               type="text"
               id="search-term"
@@ -25,14 +25,18 @@
       <main>
         <section id="table-section" class="table-section">
           <table id="pokemon-table" class="pokemon-table">
-            <tr>
+            <thead>
               <th>Image</th>
               <th>Id</th>
               <th>Name</th>
-            </tr>
+            </thead>
+            <tbody></tbody>
           </table>
         </section>
       </main>
+    </div>
+    <div id="pokemon-modal" class="pokemon-modal hidden">
+      <div id="modal-content" class="modal-content"></div>
     </div>
   </body>
 </html>
