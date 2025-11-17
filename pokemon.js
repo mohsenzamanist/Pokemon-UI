@@ -1,4 +1,4 @@
-async function getPokemons(count = 50) {
+export default async function getPokemons(count = 50) {
   const pokemonFetchs = [];
   for (let i = 0; i < count; i++) {
     pokemonFetchs.push(
@@ -12,14 +12,13 @@ async function getPokemons(count = 50) {
 }
 
 function extractDesiredData(pokemonDetails) {
-  return pokemonDetails.map(({ abilities, id, name, stats }) => {
+  return pokemonDetails.map(({ abilities, id, name, stats, sprites }) => {
     return {
       id,
       name,
       abilities,
       stats,
+      image: sprites.front_default,
     };
   });
 }
-
-module.exports = getPokemons;

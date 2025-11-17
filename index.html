@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokémon-UI</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" type="module" defer></script>
+  </head>
+  <body>
+    <div class="main-body">
+      <header class="search">
+        <form>
+          <label for="search-term"
+            >Serch:
+            <input
+              type="text"
+              id="search-term"
+              class="search-term"
+              placeholder="Pokemon name..."
+          /></label>
+          <button type="submit">Search</button>
+        </form>
+      </header>
+      <main>
+        <section id="table-section" class="table-section">
+          <table id="pokemon-table" class="pokemon-table">
+            <tr>
+              <th>Image</th>
+              <th>Id</th>
+              <th>Name</th>
+            </tr>
+          </table>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
