@@ -21,10 +21,16 @@ header {
   margin-bottom: 1rem;
 }
 
+tr:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
 .pokemon-modal {
   position: fixed;
   inset: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.6);
@@ -33,6 +39,15 @@ header {
 .hidden {
   display: none;
 }
+.pokemon-modal button {
+  all: unset;
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  color: white;
+}
+
 .modal-content {
   background: white;
   padding: 1.5rem;
@@ -45,4 +60,10 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.modal-content .close-modal-btn {
+  display: flex;
+  justify-content: right;
+  margin-top: -1rem;
+  margin-right: -1rem;
 }
