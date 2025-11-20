@@ -27,6 +27,22 @@ tr:hover {
   cursor: pointer;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  border: 2px solid red;
+}
+
+.pageNumber {
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.selected-page {
+  background-color: red;
+  cursor: none;
+}
+
 .pokemon-modal {
   position: fixed;
   inset: 0;
@@ -44,8 +60,8 @@ tr:hover {
   all: unset;
   cursor: pointer;
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
+  inset: 0.75rem 1rem auto auto;
+
   color: white;
 }
 

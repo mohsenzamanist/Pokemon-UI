@@ -1,4 +1,4 @@
-export async function getPokemons(count = 50) {
+export async function getPokemons(count = 52) {
   try {
     const pokemonsData = await fetch(
       `https://pokeapi.co/api/v2/pokemon/?limit=${count}`
