@@ -1,20 +1,29 @@
 import { getPokemonDetails, getPokemons } from "./pokemon.js";
-const pokemonTable = document.querySelector("#pokemon-table");
+const pokemonTableTbody = document.querySelector("#pokemon-table tbody");
 const tBody = document.querySelector("#pokemon-table tbody");
 const pokemonModal = document.querySelector("#pokemon-modal");
 const modalContent = document.querySelector("#modal-content");
 const searchInput = document.querySelector("#search-input");
 const pagination = document.querySelector("#pagination");
+const idSortOrder = document.querySelector("#id-sort-order");
+const nameSortOrder = document.querySelector("#name-sort-order");
+const idSortOrderSpan = document.querySelector("#id-sort-order span");
+const nameSortOrderSpan = document.querySelector("#name-sort-order span");
+const closeModalBtn = document.querySelector("#close-modal-btn button");
 
 let pokemons = [];
 let currentList = [];
+let selectedPage = 1;
+let idAscending = true;
+let nameAscending = true;
+
 window.addEventListener("load", async () => {
   pokemons = await getPokemons();
   currentList = pokemons;
   render(currentList);
 });
 
-pokemonTable.addEventListener("click", (e) => {
+pokemonTableTbody.addEventListener("click", (e) => {
   const clickedRow = e.target.closest("tr");
   if (!clickedRow) return;
   const id = clickedRow.dataset.id;
@@ -38,7 +47,42 @@ searchInput.addEventListener("keyup", (e) => {
 pagination.addEventListener("click", (e) => {
   const p = e.target.closest("p");
   if (!p) return;
-  render(currentList, Number(p.textContent));
+  selectedPage = Number(p.textContent);
+  render(currentList);
+});
+
+idSortOrder.addEventListener("click", () => {
+  idAscending = !idAscending;
+  if (nameSortOrderSpan.innerHTML !== "↑↓") nameSortOrderSpan.innerHTML = "↑↓";
+  idSortOrderSpan.innerHTML = idAscending ? "↑" : "↓";
+  currentList.sort((a, b) => {
+    const idA = Number(a.url.split("/").filter(Boolean).pop());
+    const idB = Number(b.url.split("/").filter(Boolean).pop());
+
+    return idAscending ? idA - idB : idB - idA;
+  });
+
+  render(currentList);
+});
+nameSortOrder.addEventListener("click", () => {
+  nameAscending = !nameAscending;
+  if (idSortOrderSpan.innerHTML !== "↑↓") idSortOrderSpan.innerHTML = "↑↓";
+  nameSortOrderSpan.innerHTML = nameAscending ? "↑" : "↓";
+  currentList.sort((a, b) => {
+    const nameA = a.name;
+    const nameB = b.name;
+
+    return nameAscending
+      ? nameA.localeCompare(nameB)
+      : nameB.localeCompare(nameA);
+  });
+
+  render(currentList);
+});
+
+closeModalBtn.addEventListener("click", () => {
+  pokemonModal.classList.add("hidden");
+  console.log("close");
 });
 
 async function showPokemonDetails(id) {
@@ -54,7 +98,7 @@ async function showPokemonDetails(id) {
   }</div></div>${abilitiesHtml}`;
 }
 
-function paginate(pokemons, selectedPage, pokemonPerPage = 10) {
+function paginate(pokemons, pokemonPerPage = 10) {
   const numberOfPages = Math.ceil(pokemons.length / 10);
   for (let i = 1; i <= numberOfPages; i++) {
     const pageNumber = document.createElement("p");
@@ -71,11 +115,12 @@ function paginate(pokemons, selectedPage, pokemonPerPage = 10) {
   );
 }
 
-function render(pokemons, selectedPage = 1) {
+function render(pokemons) {
   tBody.innerHTML = "";
   pagination.innerHTML = "";
 
-  const paginatedPokemons = paginate(pokemons, selectedPage);
+  const paginatedPokemons = paginate(pokemons);
+
   paginatedPokemons.forEach((pokemon) => {
     const row = document.createElement("tr");
     row.classList.add("pokemon-row");
