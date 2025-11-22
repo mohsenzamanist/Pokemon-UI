@@ -5,8 +5,11 @@ import { render } from "./render.js";
 import { initSearch } from "./events/search.js";
 import { initPagination } from "./events/pagination.js";
 import { initSort } from "./events/sort.js";
+import { renderSkeleton } from "./renderSkeleton.js";
 
 window.addEventListener("load", async () => {
+  renderSkeleton();
+
   const pokemons = await getPokemons();
   setPokmonsState(pokemons);
   setCurrentList(pokemons);
