@@ -1,7 +1,6 @@
 import { getSelectedPage, getCurrentList } from "./state.js";
 
 const tBody = document.querySelector("#pokemon-table tbody");
-
 const pagination = document.querySelector("#pagination");
 
 function paginate(pokemonPerPage = 10) {
@@ -23,6 +22,7 @@ function paginate(pokemonPerPage = 10) {
   );
 }
 
+// renders the whole page text
 export function render() {
   tBody.innerHTML = "";
   pagination.innerHTML = "";

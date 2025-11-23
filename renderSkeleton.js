@@ -1,5 +1,6 @@
 const tBody = document.querySelector("#pokemon-table tbody");
 
+// Renders a skeleton loader
 export function renderSkeleton() {
   const skeletonArray = Array.from({ length: 10 });
   skeletonArray.forEach((_) => {

@@ -44,6 +44,7 @@ main section {
   background: #4a90e2;
   border: 1px solid #dce2eb;
   color: white;
+  text-align: center;
 }
 
 .pokemon-table tr:hover {
@@ -53,6 +54,9 @@ main section {
 
 .pokemon-table tbody tr {
   border-bottom: 1px solid #dce2eb;
+}
+.pokemon-table tbody tr td {
+  text-align: center;
 }
 
 .pagination {
@@ -73,6 +77,9 @@ main section {
   cursor: none;
 }
 
+/********************************/
+/********* Modal view ***********/
+/********************************/
 .pokemon-modal {
   position: fixed;
   inset: 0;
@@ -81,21 +88,14 @@ main section {
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.6);
+  font-size: 0.8rem;
 }
 
-.hidden {
+.pokemon-modal--hidden {
   display: none;
 }
-.pokemon-modal button {
-  all: unset;
-  position: absolute;
-  top: 15.5rem;
-  right: 34rem;
-  cursor: pointer;
-  color: black;
-}
 
-.modal-content {
+.pokemon-modal__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,10 +103,72 @@ main section {
   background: white;
   padding: 1.5rem;
   border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+  width: 70%;
+  border: 2px solid red;
 }
 
+.pokemon-modal__content > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.pokemon-modal__content .pokemon-modal__close-button {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: -1rem;
+}
+.pokemon-modal__close-button button {
+  all: unset;
+}
+.pokemon-modal__close-button button:hover {
+  color: rgb(241, 161, 161);
+}
+.pokemon-modal__name {
+  color: #4a90e2;
+  font-weight: bold;
+}
+
+.pokemon-modal__abilities-title,
+.pokemon-modal__stats-title {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #eeeae5;
+  font-weight: bold;
+}
+.pokemon-modal__abilities {
+  width: 100%;
+  border-top: 2px solid #4a90e2;
+}
+.pokemon-modal__abilities-title {
+  width: 30%;
+}
+.pokemon-modal__abilities-value {
+  width: 70%;
+}
+
+.pokemon-modal__stats {
+  flex-direction: column;
+  width: 90%;
+  border-top: 2px solid #4a90e2;
+  padding-top: 0.5rem;
+}
+.pokemon-modal__table {
+  width: 100%;
+}
+
+.pokemon-modal__table tr td {
+  padding: 0.5rem;
+  width: 16.6%;
+  text-align: center;
+}
+
+/********************************/
+/********* Lazy loading ***********/
+/********************************/
 .skeleton-row {
   width: 300px;
   height: 10vh;
@@ -139,6 +201,12 @@ main section {
   }
 }
 
+@media (min-width: 600px) {
+  .pokemon-modal {
+    font-size: 1rem;
+  }
+}
+
 @media (min-width: 768px) {
   main {
     width: 80%;
@@ -148,5 +216,17 @@ main section {
 @media (min-width: 992px) {
   main {
     width: 60%;
+  }
+  .pokemon-modal__content {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+  main {
+    width: 60%;
+  }
+  .pokemon-modal__content {
+    width: 50%;
   }
 }

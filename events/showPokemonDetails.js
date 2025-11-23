@@ -1,12 +1,14 @@
+import { capitalize } from "../capitalize.js";
 import { getPokemonDetails } from "../pokemon.js";
-let pokemonModal, modalContent;
+let pokemonModal, pokemonModalContent;
+
+// Fetches the details of clicked Pokemon and shows on Modal page
 export function initModal() {
   const pokemonTableTbody = document.querySelector("#pokemon-table tbody");
-
   pokemonModal = document.querySelector("#pokemon-modal");
-  modalContent = document.querySelector("#modal-content");
+  pokemonModalContent = document.querySelector("#pokemon-modal__content");
 
-  if (!pokemonTableTbody || !pokemonModal || !modalContent) {
+  if (!pokemonTableTbody || !pokemonModal || !pokemonModalContent) {
     console.log("Modal overlay not Found!");
     return;
   }
@@ -19,21 +21,40 @@ export function initModal() {
   });
 
   pokemonModal.addEventListener("click", () => {
-    pokemonModal.classList.add("hidden");
+    pokemonModal.classList.add("pokemon-modal--hidden");
   });
 
-  modalContent.addEventListener("click", (e) => e.stopPropagation());
+  pokemonModalContent.addEventListener("click", (e) => e.stopPropagation());
 }
 
 export async function showPokemonDetails(id) {
   const pokemonDetails = await getPokemonDetails(id);
-  pokemonModal.classList.remove("hidden");
-  const abilitiesHtml = `<div><div>Abilities:</div><div><ul>${pokemonDetails.abilities
-    .map((ability) => `<li>${ability.ability.name}</li>`)
+  pokemonModal.classList.remove("pokemon-modal--hidden");
+  const abilitiesHtml = `<div class="pokemon-modal__abilities"><div class="pokemon-modal__abilities-title">Abilities:</div><div class="pokemon-modal__abilities-value"><ul>${pokemonDetails.abilities
+    .map(
+      (ability) =>
+        `<li>${ability.ability.name
+          .split("-")
+          .map((name) => capitalize(name))
+          .join(" ")}</li>`
+    )
     .join("")}</ul></div></div>`;
-  modalContent.innerHTML = `<div><img src="${
+
+  const statsHtml = `<div class="pokemon-modal__stats"><div class="pokemon-modal__stats-title">Stats:</div><div class="pokemon-modal__stats-value"><table class="pokemon-modal__table"><thead><tr><td>Hp</td><td>Attack</td><td>Defense</td><td>Sp.Atk</td><td>Sp.Def</td><td>Speed</td></tr></thead><tbody><tr>${pokemonDetails.stats
+    .map((stat) => `<td>${stat.base_stat}</td>`)
+    .join("")}</tr></tbody></table></div></div>`;
+
+  pokemonModalContent.innerHTML = `<div class="pokemon-modal__close-button"><button id="pokemon-modal__close-button">✖</button></div><div><img src="${
     pokemonDetails.sprites.front_default
-  }" alt="${pokemonDetails.name}" /><div>${
-    pokemonDetails.name.charAt(0).toUpperCase() + pokemonDetails.name.slice(1)
-  }</div></div>${abilitiesHtml}`;
+  }" alt="${
+    pokemonDetails.name
+  }" /><div class="pokemon-modal__name">${capitalize(
+    pokemonDetails.name
+  )}</div></div>${abilitiesHtml}${statsHtml}`;
+  const pokemonModalCloseButton = document.querySelector(
+    "#pokemon-modal__close-button"
+  );
+  pokemonModalCloseButton.addEventListener("click", () =>
+    pokemonModal.classList.add("pokemon-modal--hidden")
+  );
 }

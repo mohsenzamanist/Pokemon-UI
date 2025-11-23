@@ -7,6 +7,8 @@ import { initPagination } from "./events/pagination.js";
 import { initSort } from "./events/sort.js";
 import { renderSkeleton } from "./renderSkeleton.js";
 
+// Loads everything on window load
+// and initialises the events and state
 window.addEventListener("load", async () => {
   renderSkeleton();
 

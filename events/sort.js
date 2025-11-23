@@ -1,6 +1,7 @@
 import { getCurrentList } from "../state.js";
 import { render } from "../render.js";
 
+// Sorts table on Id or name
 export function initSort() {
   const idSortOrder = document.querySelector("#id-sort-order");
   const nameSortOrder = document.querySelector("#name-sort-order");

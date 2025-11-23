@@ -2,6 +2,7 @@ let pokemons = [],
   currentList = [];
 let selectedPage = 1;
 
+// States of the whole app
 export function getPokemonsState() {
   return pokemons;
 }

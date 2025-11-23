@@ -1,6 +1,7 @@
-import { getPokemonsState, setCurrentList } from "../state.js";
+import { getPokemonsState, setCurrentList, setSelectedPage } from "../state.js";
 import { render } from "../render.js";
 
+// Initialises the search event on keyup event
 export function initSearch() {
   const searchInput = document.querySelector("#search-input");
   if (!searchInput) {
@@ -15,6 +16,7 @@ export function initSearch() {
       pokemon.name.toLowerCase().includes(searchTerm)
     );
     setCurrentList(filteredList);
+    setSelectedPage(1);
     render();
   });
 }
