@@ -6,6 +6,7 @@ import { initSearch } from "./events/search.js";
 import { initPagination } from "./events/pagination.js";
 import { initSort } from "./events/sort.js";
 import { renderSkeleton } from "./renderSkeleton.js";
+import { initTheme } from "./events/theme.js";
 
 // Loads everything on window load
 // and initialises the events and state
@@ -16,6 +17,7 @@ window.addEventListener("load", async () => {
   setPokmonsState(pokemons);
   setCurrentList(pokemons);
   render();
+  initTheme();
   initSearch();
   initPagination();
   initModal();

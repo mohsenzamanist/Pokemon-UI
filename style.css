@@ -1,18 +1,32 @@
 :root {
   font-size: 16px;
   --main-font: "Montserrat", sans-serif;
+  --bg: #f0f3f7;
+  --surface: #ffffff;
+  --bg-hover: #eee;
+  --text: #333;
+  --border: #444;
+}
+
+:root.dark {
+  --bg: #1e1e1e;
+  --surface: #2a2a2a;
+  --bg-hover: #463f3f;
+  --text: #e8e8e8;
+  --primary: #6aa8ff;
+  --border: #ffffff;
 }
 
 body {
   margin: 0;
   font-family: var(--main-font);
-  background: #f0f3f7;
-  color: #333;
+  background: var(--bg);
+  color: var(--text);
 }
 
 .main-body {
   width: 100%;
-  background: #f0f3f7;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,12 +34,23 @@ body {
 }
 
 header {
+  width: 80%;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 header .search-input {
   border: 1px solid #dce2eb;
+  border-radius: 4px;
 }
+
+.theme-toggle {
+  all: unset;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
 main,
 main section {
   width: 100%;
@@ -35,8 +60,11 @@ main section {
 }
 
 .pokemon-table {
-  border-collapse: collapse;
-  background: #ffffff;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
   width: 80%;
 }
 
@@ -48,11 +76,11 @@ main section {
 }
 
 .pokemon-table tr:hover {
-  background-color: #eee;
+  background-color: var(--bg-hover);
   cursor: pointer;
 }
 
-.pokemon-table tbody tr {
+.pokemon-table tbody td {
   border-bottom: 1px solid #dce2eb;
 }
 .pokemon-table tbody tr td {
@@ -66,14 +94,18 @@ main section {
 }
 
 .pageNumber {
-  border: 1px solid black;
+  border: 1px solid var(--border);
+  border-radius: 4px;
   padding: 0.25rem;
   cursor: pointer;
 }
+.pageNumber:hover {
+  background-color: #88b3ef;
+}
 
 .selected-page {
-  background: #4a90e2;
-  color: white;
+  background: #2685f3;
+  color: var(text);
   cursor: none;
 }
 
@@ -100,7 +132,7 @@ main section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: var(--bg);
   padding: 1.5rem;
   border-radius: 12px;
   width: 70%;
@@ -136,7 +168,7 @@ main section {
   display: flex;
   justify-content: center;
   padding: 1rem;
-  background-color: #eeeae5;
+  background-color: #252320;
   font-weight: bold;
 }
 .pokemon-modal__abilities {
