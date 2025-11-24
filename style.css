@@ -86,6 +86,10 @@ main section {
 .pokemon-table tbody tr td {
   text-align: center;
 }
+.pokemon-table tbody tr img {
+  width: 20%;
+  height: 20%;
+}
 
 .pagination {
   display: flex;
