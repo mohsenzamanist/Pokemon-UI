@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=close_small");
+
 :root {
   font-size: 16px;
   --main-font: "Montserrat", sans-serif;
@@ -43,6 +45,14 @@ header {
 header .search-input {
   border: 1px solid #dce2eb;
   border-radius: 4px;
+  position: relative;
+}
+
+header .clear-search {
+  all: unset;
+  position: relative;
+  right: 1rem;
+  display: none;
 }
 
 .theme-toggle {
